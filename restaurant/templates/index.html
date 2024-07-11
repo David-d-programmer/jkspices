@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url 'book_table' %}"><button>Make a new booking</button></a>
+
+<div>
+    <h3>Existing bookings</h3>
+    <ul>
+        {% for booking in bookings %}
+        <li>{{ booking.user_email }} - {{ booking.group_size }} {{ booking.booking_date }} {{ booking.booking_time }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
+
+{% if request.user.is_authenticated %}
+  <p>{{ request.user.username }}</p>
+  <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'signup' %}">Signup</a>
+{% endif %}
+
+<h2>Welcome!</h2>

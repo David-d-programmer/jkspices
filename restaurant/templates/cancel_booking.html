@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+	<form method="POST">
+		
+		{% csrf_token %}
+		Are you sure you want to cancel ?
+		<input type="submit" value="Yes" />
+		<a href="/">Cancel </a>
+	</form>
+
