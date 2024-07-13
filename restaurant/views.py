@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from restaurant.models import Bookings, cancelbookings
+from restaurant.models import Bookings
 from restaurant.forms import BookingForm
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
@@ -27,27 +27,43 @@ def book_table(request):
     return render(request, "booking.html", {"form": form})
 
 
-def cancel_booking(request, booking_id):
-    context = {}
+def cancel_booking(request, id=3):
+    
+    details = {}
     # Add logic to cancel booking
-    booking = Bookings.objects.get(booking_id = booking_id)
+    booking = Bookings.objects.get(id = id)
     if request.method == "POST":
         booking.delete()
         
         
         return redirect('restaurant')
 
-    return render(request, "cancel_booking.html", context)
+    return render(request, "cancel_booking.html", details)
     
     
 
-def amend_booking(request, booking_id):
+def amend_booking(request, id=2):
     # Add logic to amend booking
-    booking = Bookings.objects.get(booking_id)
-    booking.no_of_persons = 10
-    # Update booking
-    booking.save()
-    # amend = amendBookings(request.user, date.toay(), 5)
+    details ={}
+    # fetch the object related to passed id
+    booking = Bookings.objects.get(id = id)
+    booking.no_of_persons = 7
+    
+ 
+    # pass the object as instance in form
+    form = BookingForm(request.POST or None, booking)
+ 
+    # save the data from the form and
+    # redirect to detail_view
+    if form.is_valid():
+        form.save()
+        return redirect('restaurant')
+ 
+    # add form dictionary to context
+    details["form"] = form
+    
+    return render(request, "amend_booking.html", {'form': form})
+    
 
 def user_login(request):
     #Add a logic to login 
@@ -79,3 +95,4 @@ def user_signup(request):
     else:
         form = SignupForm()
     return render(request, 'sign_up.html', {'form': form})
+
