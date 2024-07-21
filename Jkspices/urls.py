@@ -19,14 +19,16 @@ from django.urls import path, include
 from restaurant import views as restaurant_views
 
 
+
+
 urlpatterns = [
     path('restaurant/', restaurant_views.my_restaurant, name='restaurant'),
     path('book_table/', restaurant_views.book_table, name='book_table'),
+    path('booking_confirmation/', restaurant_views.booking_confirmation, name='booking_confirmation'),
     path('cancel_booking/<id>', restaurant_views.cancel_booking, name='cancel_booking'),
     path('amend/<id>', restaurant_views.amend_booking, name='amend'),
     path('login/', restaurant_views.user_login, name='login'),
     path('signup/', restaurant_views.user_signup, name='signup'),
     path('logout/', restaurant_views.user_logout, name='logout'),
-    #path('avoid_doublebooking/', restaurant_views.avoid_doublebooking, name='avoid_doublebooking'),
     path('admin/', admin.site.urls),
 ]

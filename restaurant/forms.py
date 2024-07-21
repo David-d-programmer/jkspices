@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class BookingForm(ModelForm):
     class Meta:
         model = Bookings
-        # fields = ["pub_date", "headline", "content", "reporter"]
+       #fields = ["table", "date", "time", "name"]
         exclude = ["user", "approved"]
 
 class SignupForm(UserCreationForm):
@@ -19,3 +19,5 @@ class SignupForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+

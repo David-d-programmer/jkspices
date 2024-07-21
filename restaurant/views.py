@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse
 from restaurant.models import Bookings
 from restaurant.forms import BookingForm
@@ -16,15 +17,32 @@ def my_restaurant(request):
 
 def book_table(request):
     # Add logic to book table
-    form = BookingForm()
+    form = 2
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            booking = form.save(commit=False)
-            booking.save()
-            return redirect('restaurant')
+            
+            user = form.cleaned_data['user']
+            user_email = form.cleaned_data['user_email']
+            time = form.cleaned_data['time']
+
+            #checking if the table is already booked
+            if Bookings.objects.filter(user=user, booking_time=booking_time, user_email=user_email).exists():
+                messages.error(request, 'This table is alreeady booked for this time')
+            else:
+                form.save()
+                messages.success(request, 'Your table has been booked successfully')
+            
+
+            return redirect('booking_confirmation')
+        else:
+            form = BookingForm
+        
 
     return render(request, "booking.html", {"form": form})
+
+def booking_confirmation(request):
+    return render(request, 'booking_confirmation.html')
 
 
 def cancel_booking(request, id=3):
@@ -65,6 +83,7 @@ def amend_booking(request, id=2):
     return render(request, "amend_booking.html", {'form': form})
     
 
+
 def user_login(request):
     #Add a logic to login 
     form = LoginForm()
@@ -96,3 +115,29 @@ def user_signup(request):
         form = SignupForm()
     return render(request, 'sign_up.html', {'form': form})
 
+
+def avoid_doublebooking(request):
+        #add the request in the ModelForm
+        form = BookingForm(request or None)
+        #self.request = kwargs.pop('request', None)
+        #call the default super
+        #super(BookingForm, self).avoid_doublebooking(*args, **kwargs)
+        if form.is_valid():
+
+            cleaned_data = form.clean()
+            name = cleaned_data.get('name')
+            client = cleaned_data.get('client')
+
+            return redirect('restaurant')
+        
+            try:
+                Bookings.objects.get(name=name, author=author, borrower=borrower)
+
+            except Bookings.DoesNotExist:
+                return cleaned_data()
+
+        else:
+            raise avoid_doublebooking('The client already booked')
+
+        return render(request, 'avoid_doublebooking.html', {'form':form})
+        

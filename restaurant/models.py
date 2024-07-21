@@ -14,9 +14,7 @@ class Bookings(models.Model):
     group_size = models.PositiveIntegerField()
     booking_date = models.DateField()
     
-    booking_time = models.TimeField(auto_now_add=False, blank=False)
-    
-    # comment = models.TextField(blank=True)
+    booking_time = models.TimeField(auto_now_add=False, blank=False, max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
