@@ -17,18 +17,22 @@ def my_restaurant(request):
 
 def book_table(request):
     # Add logic to book table
-    form = 2
+    form = BookingForm
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
             
-            user = form.cleaned_data['user']
+            #user = form.cleaned_data['user']
             user_email = form.cleaned_data['user_email']
-            time = form.cleaned_data['time']
+            #time = form.cleaned_data['time']
+            user = authenticate(request, user_email=user_email, time=time)
+            if user:
+                book_table(request, user)    
+                return redirect('restaurant')
 
             #checking if the table is already booked
             if Bookings.objects.filter(user=user, booking_time=booking_time, user_email=user_email).exists():
-                messages.error(request, 'This table is alreeady booked for this time')
+                messages.error(request, 'This table is already booked for this time')
             else:
                 form.save()
                 messages.success(request, 'Your table has been booked successfully')
