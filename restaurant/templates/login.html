@@ -1,8 +1,15 @@
 
-<h2>Login</h2>
-<form method="POST">
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+<h3 id="getin1">Login</h3>
+<form id="getin" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
-    <a href="{% url 'signup' %}">Dont have Account Create</a>
+    <a href="{% url 'login' %}"><button type="submit">Login</button></a>
+    <a href="{% url 'logout' %}"><button type="submit">Logout</button></a>
+    <button type="submit">Forgot password</button>
+
+    <a href="{% url 'signup' %}">Create account</a>
 </form>

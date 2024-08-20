@@ -5,7 +5,7 @@ from restaurant.models import Bookings
 from restaurant.forms import BookingForm
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
-
+import time
 
 
 # Create your views here.
@@ -25,6 +25,7 @@ def book_table(request):
             #user = form.cleaned_data['user']
             user_email = form.cleaned_data['user_email']
             #time = form.cleaned_data['time']
+            booking_time = form.cleaned_data['booking_time']
             user = authenticate(request, user_email=user_email, time=time)
             if user:
                 book_table(request, user)    

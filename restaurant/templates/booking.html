@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+
 
 {% block content %}
 <form method="post">
@@ -8,7 +8,6 @@
     
 </form>
 
-<a href="{% url 'book_table' %}"><button>Make a new booking</button></a>
 
 <div>
     <ul>
@@ -17,4 +16,5 @@
         {% endfor %}
     </ul>
 </div>
+
 {% endblock content %}
