@@ -3,8 +3,8 @@
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
-<h3 id="getin1">Login</h3>
-<form id="getin" method="POST">
+<h2 id="getin1">Login</h2>
+<form id="loginfrm" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <a href="{% url 'login' %}"><button type="submit">Login</button></a>
