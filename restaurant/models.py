@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='posts/images/', blank=True, null=True)
+    reservation = models.URLField(max_length=200, blank=True, null=True)
+    contact = models.CharField(max_length=100)
+    special_offers =models.TextField(blank=True, null=True)
 
 
 class Bookings(models.Model):
