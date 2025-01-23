@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from restaurant.views import generic
+from .models import Post
 from django.contrib import messages
 from django.http import HttpResponse
 from restaurant.models import Bookings
@@ -9,6 +11,11 @@ import time
 
 
 # Create your views here.
+
+class Postlist(generic.ListView):
+    queryset = Post.objects.all()
+    template_name = "post_list.html"
+    
 def my_restaurant(request):
     bookings = Bookings.objects.all()
     return render(request, "index.html", {'bookings': bookings})

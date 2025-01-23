@@ -11,7 +11,27 @@ class Post(models.Model):
     reservation = models.URLField(max_length=200, blank=True, null=True)
     contact = models.CharField(max_length=100)
     special_offers =models.TextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    field_1 = models.CharField()
 
+    class Meta:
+        ordering = ["created_on"]
+    def __str__(self):
+        return (self.title)     
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commenter")
+    body = models.TextField()
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_on"]
+    def __str__(self):
+        return (self.body)
+    
 
 class Bookings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
