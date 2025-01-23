@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from restaurant.views import generic
+from django.views import generic
 from .models import Post
 from django.contrib import messages
 from django.http import HttpResponse
@@ -13,9 +13,13 @@ import time
 # Create your views here.
 
 class Postlist(generic.ListView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(status=1)
     template_name = "post_list.html"
+
+def home(request):
+    return render(request, 'restaurant/home.html') 
     
+
 def my_restaurant(request):
     bookings = Bookings.objects.all()
     return render(request, "index.html", {'bookings': bookings})
@@ -54,7 +58,7 @@ def book_table(request):
     return render(request, "booking.html", {"form": form})
 
 def booking_confirmation(request):
-    return render(request, 'booking_confirmation.html')
+    return render(request, 'restaurant/booking_confirmation.html')
 
 
 def cancel_booking(request, id=3):
@@ -68,7 +72,7 @@ def cancel_booking(request, id=3):
         
         return redirect('restaurant')
 
-    return render(request, "cancel_booking.html", details)
+    return render(request, "restaurant/cancel_booking.html", details)
     
     
 
@@ -92,7 +96,7 @@ def amend_booking(request, id=2):
     # add form dictionary to context
     details["form"] = form
     
-    return render(request, "amend_booking.html", {'form': form})
+    return render(request, "restaurant/amend_booking.html", {'form': form})
     
 
 
@@ -110,7 +114,7 @@ def user_login(request):
                 return redirect('restaurant')
     
         
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'restaurant/login.html', {'form': form})
 
 def user_logout(request):
     logout(request)
@@ -125,7 +129,7 @@ def user_signup(request):
             return redirect('login')
     else:
         form = SignupForm()
-    return render(request, 'sign_up.html', {'form': form})
+    return render(request, 'restaurant/sign_up.html', {'form': form})
 
 
 def avoid_doublebooking(request):
@@ -151,5 +155,5 @@ def avoid_doublebooking(request):
         else:
             raise avoid_doublebooking('The client already booked')
 
-        return render(request, 'avoid_doublebooking.html', {'form':form})
+        return render(request, 'restaurant/avoid_doublebooking.html', {'form':form})
         

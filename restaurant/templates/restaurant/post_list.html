@@ -1,62 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jkspices Posts</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+{% extends "base.html" %}  
 
-    <!-- Navigation Bar -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block content %}
+    <h1>Posts List</h1>
 
-    <main>
-        <section class="post-list">
-            <h1>Our Latest Posts</h1>
-
-            <!-- Loop to display posts -->
+    <div class="post-list">
+        {% for post in posts %}
             <div class="post">
-                <h2><a href="/posts/post-1">New Seasonal Menu Available!</a></h2>
-                <p class="meta">Posted on January 23, 2025 by Restaurant team</p>
-                <p class="excerpt">We’re excited to announce a new seasonal menu, featuring fresh ingredients from local farms. Come in and try our new dishes...</p>
-                <a href="/posts/post-1" class="read-more">Read more</a>
+                <h2>{{ post.title }}</h2>
+                <p><strong>Created on:</strong> {{ post.created_on }}</p>
+                <p>{{ post.description }}</p>
+                <a href="{% url 'post-detail' post.id %}">Read more</a>
             </div>
-
-            <div class="post">
-                <h2><a href="/posts/post-2">Join Us for Valentine's Day Dinner</a></h2>
-                <p class="meta">Posted on January 15, 2025 by Restaurant Team</p>
-                <p class="excerpt">Celebrate love and food with our special Valentine's Day dinner. Reserve your spot today before we’re fully booked...</p>
-                <a href="/posts/post-2" class="read-more">Read more</a>
-            </div>
-
-            <div class="post">
-                <h2><a href="/posts/post-3">Behind the Scenes: A Day in the Kitchen</a></h2>
-                <p class="meta">Posted on January 10, 2025 by Restaurant team</p>
-                <p class="excerpt">Ever wonder what goes on behind the kitchen doors? Join us as we give you a sneak peek of the action that happens every day...</p>
-                <a href="/posts/post-3" class="read-more">Read more</a>
-            </div>
-
-            <!-- Pagination (Optional) -->
-            <div class="pagination">
-                <a href="#">&laquo; Previous</a>
-                <a href="#">Next &raquo;</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Jkspices. All Rights Reserved.</p>
-    </footer>
-
-</body>
-</html>
+        {% empty %}
+            <p>No posts available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

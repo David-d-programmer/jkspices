@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 
@@ -12,7 +13,7 @@ class Post(models.Model):
     contact = models.CharField(max_length=100)
     special_offers =models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    field_1 = models.CharField()
+    status = models.IntegerField(default=1)
 
     class Meta:
         ordering = ["created_on"]

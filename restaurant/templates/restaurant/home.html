@@ -1,0 +1,43 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Homepage</title>
+    <link rel="stylesheet" href="{% static 'restaurant/css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Jkspices</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="main-content">
+        <div class="text">
+            <h2>Delicious Meals</h2>
+            <p>Welcome to our restaurant, where we serve the finest dishes with love and care. Whether you're craving a juicy steak, fresh seafood, or vegetarian delicacies, we've got you covered!</p>
+            <button>Book a Table</button>
+        </div>
+        <div class="image">
+            <img src="{% static 'restaurant/images/spicy-noodle-6902956_1280.jpg' %}" alt="Spicy Noodle">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Restaurant Name. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
