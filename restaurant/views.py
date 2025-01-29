@@ -14,10 +14,11 @@ import time
 
 class Postlist(generic.ListView):
     queryset = Post.objects.filter(status=1)
-    template_name = "post_list.html"
+    template_name = "restaurant/index.html"
 
-def home(request):
-    return render(request, 'restaurant/home.html') 
+def restaurant_home(request):
+    
+    return render(request, 'restaurant/home.html')
     
 
 def my_restaurant(request):

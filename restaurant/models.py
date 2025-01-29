@@ -1,18 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from datetime import datetime
 
 
 
 # Create your models here.
 class Post(models.Model):
+    restaurant_name = models.CharField(max_length=255, default="Jkspices")
     title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='posts/images/', blank=True, null=True)
     reservation = models.URLField(max_length=200, blank=True, null=True)
     contact = models.CharField(max_length=100)
     special_offers =models.TextField(blank=True, null=True)
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(default=datetime.now)
     status = models.IntegerField(default=1)
 
     class Meta:

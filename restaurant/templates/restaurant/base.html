@@ -1,4 +1,7 @@
 {% load static %}
+
+{% url 'home' as restaurant %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,49 +9,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="jkspices. Good food, Great taste">
-    <!--Title-->
-    <title>Jkspices</title>
-    <!--Style sheet-->
-    <link rel="stylesheet" href="{% static 'restaurant/css/style.css' %}">
-    <link rel="icon" href="/path/to/your/favicon.ico">
+    <meta name="description" content="Jkspices. Good food, Great taste. Experience authentic Indian flavors in New York.">
+    <title>Jkspices - Taste the Authentic Flavors</title>
 
+    <!-- Linking the external CSS stylesheet -->
+    <link rel="stylesheet" href="{% static 'restaurant/css/style.css' %}">
+    <link rel="icon" href="{% static 'restaurant/images/favicon.ico' %}">
+
+    <!-- Add any other necessary CSS links, like FontAwesome or Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     
 </head>
 
 <body>
-    <!--header-->
+    <!-- Header Section -->
     <header>
-        <a href="{% url 'restaurant' %}">
-            <h2 id="logo">Jkspices</h2>
+        <div class="container">
+            <a href="{% url 'restaurant' %}" id="logo">Jkspices</a>
 
-            <ul id="navbar">
-                <li><a href="{% url 'restaurant' %}" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="{% url 'book_table' %}">Book a table</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Register</a></li>
-   
-            </ul>
-        </a>
-        
-        <label for="nav-toggle" class="nav-toggle-label"><i class="fa fa-solid fa-bars"></i></label>
-        
+            <nav>
+                <ul id="navbar">
+                    <li><a href="{% url 'restaurant' %}" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{% url 'book_table' %}">Book a Table</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Register</a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Navigation Toggle -->
+            <label for="nav-toggle" class="nav-toggle-label">
+                <i class="fa fa-bars"></i>
+            </label>
+            <input type="checkbox" id="nav-toggle" hidden>
+        </div>
     </header>
-    <main>
 
+    <!-- Main Content Section -->
+    <main>
+        <section id="hero">
+            <div class="container text-center">
+                <h1>Welcome to Jkspices</h1>
+                <p>Discover the authentic taste of India with every bite!</p>
+                <a href="{% url 'book_table' %}" class="cta-button">Reserve a Table</a>
+            </div>
+        </section>
+
+        {% block content %}
+        <!-- Dynamic content will be injected here (like for Home, Menu, Contact, etc.) -->
+        {% endblock content %}
     </main>
+
+    <!-- Footer Section -->
     <footer>
-        
+        <div class="container">
+            <p>&copy; 2025 Jkspices | All Rights Reserved</p>
+            <p>Follow us on: 
+                <a href="https://facebook.com/Jkspices" target="_blank">Facebook</a> | 
+                <a href="https://instagram.com/Jkspices" target="_blank">Instagram</a>
+            </p>
+        </div>
     </footer>
 
-    <section class="content">
-        {%block content %}
-            
-        {%endblock content%}
-    </section>
-    
+    <!-- External JS (if any) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 
 </html>

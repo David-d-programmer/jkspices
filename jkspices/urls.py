@@ -21,6 +21,7 @@ from restaurant import views as restaurant_views
 
 
 
+
 urlpatterns = [
     path('restaurant/', include('restaurant.urls'), name='restaurant-urls'),
     path('book_table/', restaurant_views.book_table, name='book_table'),
