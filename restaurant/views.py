@@ -17,9 +17,16 @@ class Postlist(generic.ListView):
     template_name = "restaurant/index.html"
 
 def restaurant_home(request):
-    
     return render(request, 'restaurant/home.html')
+
+def about(request):
+    return render(request, 'restaurant/about.html')
     
+def menu(request):
+    return render(request, 'restaurant/menu.html')
+
+def contact(request):
+    return render(request, 'restaurant/contact.html')
 
 def my_restaurant(request):
     bookings = Bookings.objects.all()

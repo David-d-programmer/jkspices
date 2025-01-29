@@ -1,12 +1,11 @@
-{% extends "restaurant/home.html" %}
-
-{% block content %}
+    {% load static %}
     <!-- Hero Section -->
     <section id="hero">
         <div class="container text-center">
             <h1>Welcome to Jkspices</h1>
             <p>Experience the authentic taste of Indian cuisine like never before!</p>
             <a href="{% url 'book_table' %}" class="cta-button">Reserve a Table</a>
+            <link rel="stylesheet" href="{% static 'restaurant/css/style.css' %}">
         </div>
     </section>
 
@@ -79,4 +78,4 @@
     <a href="{% url 'signup' %}">Signup</a>
     {% endif %}
 
-{% endblock content %}
+
