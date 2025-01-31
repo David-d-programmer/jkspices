@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .models import Post
 from django.contrib import messages
@@ -72,21 +72,27 @@ def book_table(request):
     return render(request, "restaurant/booking.html", {"form": form})
 
 def booking_confirmation(request):
-    return render(request, 'restaurant/booking_confirmation.html')
+    # Assuming you have a way of getting the current booking (e.g., from the session or last saved booking)
+    booking = Bookings.objects.last()  # Or use another method to fetch the correct booking
+    
+    if not booking:
+        messages.error(request, "No booking found.")
+        return redirect('restaurant')  # Or wherever you want to redirect if there's no booking
+    
+    return render(request, 'restaurant/booking_confirmation.html', {'booking': booking})
 
 
 def cancel_booking(request, id):
+    # Get the booking, or return a 404 if not found
+    booking = get_object_or_404(Bookings, id=id)
     
-    details = {}
-    # Add logic to cancel booking
-    booking = Bookings.objects.get(id = 3)
     if request.method == "POST":
+        # Cancel the booking by deleting it
         booking.delete()
-        
-        
-        return redirect('restaurant')
+        return redirect('restaurant')  # Make sure 'restaurant' URL pattern exists
 
-    return render(request, "restaurant/cancel_booking.html", details)
+    # Render the cancel booking page with optional context (if needed)
+    return render(request, "restaurant/cancel_booking.html")
     
     
 
