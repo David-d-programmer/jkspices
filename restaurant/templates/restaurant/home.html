@@ -1,5 +1,7 @@
-{% load static %}
 
+
+
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +29,7 @@
         <div class="text">
             <h2>Delicious Meals</h2>
             <p>Welcome to our restaurant, where we serve the finest dishes with love and care. Whether you're craving a juicy steak, fresh seafood, or vegetarian delicacies, we've got you covered!</p>
-            <button>Book a Table</button>
+            <button> <a href="{% url 'book_table' %}" class="cta-button">Reserve a Table</a></button>
         </div>
         <div class="image">
             <img src="{% static 'restaurant/css/images/spicy-noodle-6902956_1280.jpg' %}" alt="Spicy Noodle">

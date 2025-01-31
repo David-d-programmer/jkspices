@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from restaurant.models import Bookings
 from restaurant.forms import BookingForm
+from django.http import Http404
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
 import time
@@ -28,9 +29,14 @@ def menu(request):
 def contact(request):
     return render(request, 'restaurant/contact.html')
 
+def submit_form(request):
+    return render(request, 'submit_form.html')
+
 def my_restaurant(request):
     bookings = Bookings.objects.all()
     return render(request, "index.html", {'bookings': bookings})
+
+
 
 
 
@@ -63,17 +69,17 @@ def book_table(request):
             form = BookingForm
         
 
-    return render(request, "booking.html", {"form": form})
+    return render(request, "restaurant/booking.html", {"form": form})
 
 def booking_confirmation(request):
     return render(request, 'restaurant/booking_confirmation.html')
 
 
-def cancel_booking(request, id=3):
+def cancel_booking(request, id):
     
     details = {}
     # Add logic to cancel booking
-    booking = Bookings.objects.get(id = id)
+    booking = Bookings.objects.get(id = 3)
     if request.method == "POST":
         booking.delete()
         
@@ -84,28 +90,25 @@ def cancel_booking(request, id=3):
     
     
 
-def amend_booking(request, id=2):
-    # Add logic to amend booking
-    details ={}
-    # fetch the object related to passed id
-    booking = Bookings.objects.get(id = id)
-    booking.no_of_persons = 7
+def amend(request, id):
+    try:
+        # Fetch the booking object by ID
+        booking = Bookings.objects.get(id=id)
+    except Bookings.DoesNotExist:
+        # Handle the case where the booking doesn't exist (e.g., 404 error)
+        raise Http404("Booking not found")
     
- 
-    # pass the object as instance in form
-    form = BookingForm(request.POST or None, booking)
- 
-    # save the data from the form and
-    # redirect to detail_view
+    # Initialize form with the booking instance
+    form = BookingForm(request.POST or None, instance=booking)
+    
     if form.is_valid():
+        # Save the updated form
         form.save()
-        return redirect('restaurant')
- 
-    # add form dictionary to context
-    details["form"] = form
+        # Redirect to the booking list or a confirmation page
+        return redirect('restaurant')  # or redirect('restaurant:booking_detail', id=booking.id)
     
+    # Add the form to context and render the template
     return render(request, "restaurant/amend_booking.html", {'form': form})
-    
 
 
 def user_login(request):

@@ -31,8 +31,8 @@
             <nav>
                 <ul id="navbar">
                     <li><a href="{% url 'restaurant' %}" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
                     <li><a href="{% url 'book_table' %}">Book a Table</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <li><a href="{% url 'signup' %}">Register</a></li>
@@ -40,10 +40,7 @@
             </nav>
 
             <!-- Mobile Navigation Toggle -->
-            <label for="nav-toggle" class="nav-toggle-label">
-                <i class="fa fa-bars"></i>
-            </label>
-            <input type="checkbox" id="nav-toggle" hidden>
+            
         </div>
     </header>
 

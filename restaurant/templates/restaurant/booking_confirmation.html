@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,5 +11,9 @@
     </body>
 
     <a href="{% url 'book_table' %}"><button>Make a new booking</button></a>
+    <a href="{% url 'amend' id=2 %}"><button>Amend booking</button></a>
+    <a href="{% url 'cancel_booking' id=3 %}"><button>Cancel booking</button></a>
+    <a href="{% url 'restaurant' %}"><button>Home</button></a>
+    
 
 </html>
