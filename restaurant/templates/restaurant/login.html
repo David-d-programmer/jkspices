@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title class="log">Login</title>
 </head>
-<body>
+<body class="log">
     <h2>Login</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button> <a href="{% url 'restaurant' %}" class="cta-button">login</a></button>
+        <p> New users <button> <a href="{% url 'signup' %}" class="cta-button">Sign up</a></button></p>
     </form>
 </body>
 </html>

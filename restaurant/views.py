@@ -8,6 +8,7 @@ from restaurant.forms import BookingForm
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
+from django.core.exceptions import ValidationError
 import time
 
 
@@ -30,7 +31,7 @@ def contact(request):
     return render(request, 'restaurant/contact.html')
 
 def submit_form(request):
-    return render(request, 'submit_form.html')
+    return render(request, 'restaurant/submit_form.html')
 
 def my_restaurant(request):
     bookings = Bookings.objects.all()
@@ -150,27 +151,28 @@ def user_signup(request):
 
 
 def avoid_doublebooking(request):
-        #add the request in the ModelForm
-        form = BookingForm(request or None)
-        #self.request = kwargs.pop('request', None)
-        #call the default super
-        #super(BookingForm, self).avoid_doublebooking(*args, **kwargs)
-        if form.is_valid():
+    # Add the request in the ModelForm
+    form = BookingForm(request.POST or None)
 
-            cleaned_data = form.clean()
-            name = cleaned_data.get('name')
-            client = cleaned_data.get('client')
+    if form.is_valid():
+        cleaned_data = form.cleaned_data
+        name = cleaned_data['name']
+        client = cleaned_data['client']
 
+        try:
+            # Check if a booking already exists with the same name and client
+            Bookings.objects.get(name=name, client=client)
+            # If it exists, raise an error (double-booking detected)
+            raise ValidationError('The client has already booked.')
+        except Bookings.DoesNotExist:
+            # Proceed with booking logic if no double-booking is found
+            # Save the booking here, for example:
+            # booking = Bookings(name=name, client=client)
+            # booking.save()
             return redirect('restaurant')
-        
-            try:
-                Bookings.objects.get(name=name, author=author, borrower=borrower)
 
-            except Bookings.DoesNotExist:
-                return cleaned_data()
+    else:
+        # If form is invalid, return to the same page with errors
+        return render(request, 'restaurant/avoid_doublebooking.html', {'form': form})
 
-        else:
-            raise avoid_doublebooking('The client already booked')
-
-        return render(request, 'restaurant/avoid_doublebooking.html', {'form':form})
-        
+    return render(request, 'restaurant/avoid_doublebooking.html', {'form': form})

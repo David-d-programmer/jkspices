@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views  # Use views instead of restaurant_views
 
+
 urlpatterns = [
     path('', views.restaurant_home, name='restaurant'),  # A pattern for the restaurant home
     path('book_table/', views.book_table, name='book_table'),
+    path('avoid_doublebooking/', views.avoid_doublebooking, name='avoid_doublebooking'),
     path('booking_confirmation/', views.booking_confirmation, name='booking_confirmation'),
     path('cancel_booking/<int:id>/', views.cancel_booking, name='cancel_booking'),
     path('restaurant/amend/<int:id>/', views.amend, name='amend'),
