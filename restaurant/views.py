@@ -16,7 +16,8 @@ import time
 
 class Postlist(generic.ListView):
     queryset = Post.objects.filter(status=1)
-    template_name = "restaurant/index.html"
+    template_name = "restaurant/menu.html"
+    paginated_by = 5
 
 def restaurant_home(request):
     return render(request, 'restaurant/home.html')
