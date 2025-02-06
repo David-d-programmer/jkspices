@@ -30,14 +30,15 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-_9dh1*5%1-hji-pduc0aru7woircn)v!2mt(z^&7^r#f2!a+%j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  True
+DEBUG =  False
 
 ALLOWED_HOSTS = [
+    'jkspices.herokuapp.com',
     '8000-daviddprogramm-jkspices-ac5bkdraw66.ws-eu117.gitpod.io','.herokuapp.com'
     ]
 CSRF_TRUSTED_ORIGINS =  [
     
-    'https://8000-daviddprogramm-jkspices-ac5bkdraw66.ws-eu117.gitpod.io'
+   'https://jkspices.herokuapp.com',
    
 ]
 
