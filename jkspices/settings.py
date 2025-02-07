@@ -41,6 +41,8 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS =  [
     
    'https://jkspices.herokuapp.com',
+   'https://8000-daviddprogramm-jkspices-ac5bkdraw66.ws-eu117.gitpod.io',
+   
    
 ]
 
@@ -133,6 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/admin/'
 
 
 # Internationalization
