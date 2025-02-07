@@ -19,6 +19,9 @@ class Postlist(generic.ListView):
     template_name = "restaurant/index.html"
     paginated_by = 5
 
+def home(request):
+    return render(request, 'restaurant/home.html') 
+
 def restaurant_home(request):
     return render(request, 'restaurant/home.html')
 

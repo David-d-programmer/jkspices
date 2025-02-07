@@ -3,6 +3,7 @@ from . import views  # Use views instead of restaurant_views
 
 
 urlpatterns = [
+    
     path('', views.restaurant_home, name='restaurant'),  # A pattern for the restaurant home
     path('book_table/', views.book_table, name='book_table'),
     path('avoid_doublebooking/', views.avoid_doublebooking, name='avoid_doublebooking'),

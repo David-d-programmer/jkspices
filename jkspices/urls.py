@@ -23,6 +23,7 @@ from restaurant import views as restaurant_views
 
 
 urlpatterns = [
+    path('', restaurant_views.home, name='home'),  # Home page route
     path('restaurant/', include('restaurant.urls'), name='restaurant-urls'),
     path('admin/', admin.site.urls),
 ]
