@@ -15,7 +15,46 @@ JKSpices is a family-owned restaurant specializing in delicious dishes from the 
 * Hours: Monday - Sunday, 11 AM to 10 PM
 ![ about page](/restaurant/static/restaurant/css/images/about.png)
 # TESTING
+To ensure the functional running of this application we did all the required testing needed to be done from the front end to the backend.
+### FRONT END VALIDATOR TESTING
+ HTML - W3C VALIDATOR 
 
+ CSS - Jigsaw VALIDATOR
+### Prerequisites
+All manner of testing was done and neceswary installation was done to keep this app running:
+npm install and everything in the pip3 list
+
+### Unfixed bug
+I encountered a lot bugs when trying to deploy my project which the tutors help me so much to fix and i also made use of some materials to fix some. i encountered some challenges in the database area and i just followed every information about what needed to be done and i fixed it. The only thing left undone is navbar of the home page, i don't think it's responsive enough.
+# DEPLOYEMENT
+This site was deployed by completing the following steps:
+
+- Log in to Heroku or create an account
+- On the main page click the button labelled New in the top right corner and from the drop-down menu select Create New App
+- You must enter a unique app name
+- Next select your region
+- Click on the Create App button
+- The next page is the project’s Deploy Tab. Click on the Settings Tab and scroll down to Config Vars
+- Click Reveal Config Vars and enter disable collectstatic and give it a value one, also add the api key and the database url  and click the Add button
+- Scroll down to the Buildpack section click Add Buildpack select python and click Save Changes
+- Scroll to the top of the page and choose the Deploy tab
+- Select Github as the deployment method
+- Confirm you want to connect to GitHub
+- Search for the repository name and click the connect button
+- Scroll to the bottom of the deploy page and select the preferred deployment type
+- Click either Enable Automatic Deploys for automatic deployment when you push updates to Github
+you can see the live link [here](https://jkspices-ff946ce51470.herokuapp.com/)
+
+# CREDIT
+## Contents
+- Most images were gotten from Pixabay 
+- The terminal function and template for the deployable application was provided by [Code Institute - Template](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSD101_WTS+4/courseware/713441aba05441dfb3a7cf04f3268b3f/824fccecd0fe4e44871eeabcbf69d830/)
+
+## Information Sources
+- [Stackoverflow](https://stackoverflow.com/questions/44935514/heroku-uploading-a-static-site-on-heroku)
+- [Django documentation](https://docs.djangoproject.com/en/5.1/)
+- [Code Institute template]((https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSD101_WTS+4/courseware/713441aba05441dfb3a7cf04f3268b3f/824fccecd0fe4e44871eeabcbf69d830/)
+)
 # Menu
 At JKSpices, we take pride in offering a diverse menu that caters to every palate. Here are some of our popular dishes:
 Starters
@@ -59,3 +98,5 @@ Stay updated with our latest offers, events, and mouth-watering pictures by foll
 * Facebook: [Facebook page]
 * Twitter: [Twitter handle]
 * TikTok: [TikTok handle]
+# Special thanks
+Special thanks to my mentor Sandeep Aggarwal, my tutors at Code Institute, for their assistance throughout this project.
